@@ -1,6 +1,7 @@
 import { IconChevronDown } from "@tabler/icons-react"
 import type { Metadata, Viewport } from "next"
 import Image from "next/image"
+import { RsvpForm } from "@/components/rsvp-form"
 
 export const metadata: Metadata = {
   title: "The Wedding of Mack & Rolaine",
@@ -266,6 +267,34 @@ export default function Page() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section
+        id="rsvp"
+        aria-labelledby="rsvp-heading"
+        className="scroll-mt-4 border-t border-[#12332c]/10 bg-[#f8f6f0] px-safe py-20 sm:py-28"
+      >
+        <div className="mx-auto w-full max-w-2xl text-center">
+          <div className="slide-left">
+            <h2
+              id="rsvp-heading"
+              className="font-serif text-4xl font-normal text-[#12332c] sm:text-5xl"
+            >
+              RSVP
+            </h2>
+            <div className="reveal-line mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-[#a8874a]/60 to-transparent" />
+            <p className="mt-6 text-sm leading-relaxed text-[#4b5750]">
+              Please reply by January 10, 2027.
+            </p>
+          </div>
+
+          <RsvpForm />
+
+          <p className="mt-5 text-[0.65rem] leading-relaxed tracking-[0.08em] text-[#12332c]/45">
+            Seats are reserved per invitation. If anything looks off, kindly
+            reach out to us.
+          </p>
         </div>
       </section>
     </main>
