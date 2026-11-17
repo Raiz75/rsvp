@@ -108,6 +108,39 @@
     }
 }
 
+@keyframes word-rise {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 0.5em, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes slide-from-left {
+    from {
+        opacity: 0;
+        transform: translate3d(-48px, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes slide-from-right {
+    from {
+        opacity: 0;
+        transform: translate3d(48px, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
 @keyframes parallax-drift {
     from {
         transform: translate3d(0, -7%, 0) scale(1.16);
@@ -118,6 +151,14 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
+    .hero-word {
+        display: inline-block;
+        animation-name: word-rise;
+        animation-duration: 900ms;
+        animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+        animation-fill-mode: both;
+    }
+
     @supports (animation-timeline: view()) {
         .reveal,
         .reveal-stagger > * {
@@ -158,6 +199,27 @@
             animation: parallax-drift linear both;
             animation-timeline: view();
             animation-range: cover 0% cover 100%;
+        }
+
+        .slide-left,
+        .slide-list > * {
+            animation: slide-from-left linear both;
+            animation-timeline: view();
+            animation-range: entry 0% entry 75%;
+        }
+
+        .slide-right {
+            animation: slide-from-right linear both;
+            animation-timeline: view();
+            animation-range: entry 0% entry 75%;
+        }
+
+        .slide-list > * {
+            animation-range: entry 0% entry 80%;
+        }
+
+        .slide-list > :nth-child(even) {
+            animation-name: slide-from-right;
         }
     }
 }

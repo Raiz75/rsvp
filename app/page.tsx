@@ -66,7 +66,7 @@ export default function Page() {
   )}&output=embed`
 
   return (
-    <main className="bg-[#f8f6f0]">
+    <main className="overflow-x-clip bg-[#f8f6f0]">
       <section className="relative isolate flex min-h-svh flex-col items-center justify-center overflow-hidden px-safe py-20 text-center">
         <div className="absolute inset-0 -z-10">
           <Image
@@ -79,13 +79,21 @@ export default function Page() {
           />
         </div>
 
-        <div className="flex w-full max-w-2xl animate-in flex-col items-center duration-1000 fade-in slide-in-from-bottom-2 motion-reduce:animate-none md:translate-x-[8%]">
-          <p className="text-[0.7rem] font-medium tracking-[0.45em] text-[#0d6157]/80 uppercase">
+        <div className="flex w-full max-w-2xl flex-col items-center md:translate-x-[8%]">
+          <p className="animate-in text-[0.7rem] font-medium tracking-[0.45em] text-[#0d6157]/80 uppercase duration-700 fade-in slide-in-from-bottom-2 motion-reduce:animate-none">
             The Wedding of
           </p>
 
           <h1 className="mt-6 font-serif text-5xl font-normal tracking-tight text-balance text-[#12332c] sm:text-6xl md:text-7xl">
-            Mack &amp; Rolaine
+            <span className="hero-word" style={{ animationDelay: "150ms" }}>
+              Mack
+            </span>{" "}
+            <span className="hero-word" style={{ animationDelay: "300ms" }}>
+              &amp;
+            </span>{" "}
+            <span className="hero-word" style={{ animationDelay: "450ms" }}>
+              Rolaine
+            </span>
           </h1>
         </div>
 
@@ -122,7 +130,7 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="reveal text-center md:text-left">
+          <div className="slide-right text-center md:text-left">
             <p className="text-[0.7rem] font-medium tracking-[0.4em] text-[#0d6157]/80 uppercase">
               Our Story
             </p>
@@ -151,7 +159,7 @@ export default function Page() {
         className="scroll-mt-4 border-t border-[#12332c]/10 bg-[#f8f6f0] px-safe py-20 sm:py-28"
       >
         <div className="mx-auto w-full max-w-4xl">
-          <div className="reveal text-center">
+          <div className="slide-left text-center">
             <p className="text-[0.7rem] font-medium tracking-[0.4em] text-[#0d6157]/80 uppercase">
               When &amp; Where
             </p>
@@ -222,7 +230,7 @@ export default function Page() {
         className="border-t border-[#12332c]/10 bg-[#f3f0e6] px-safe py-20 sm:py-28"
       >
         <div className="mx-auto w-full max-w-4xl">
-          <div className="reveal text-center">
+          <div className="slide-right text-center">
             <p className="text-[0.7rem] font-medium tracking-[0.4em] text-[#0d6157]/80 uppercase">
               The Entourage
             </p>
@@ -245,7 +253,7 @@ export default function Page() {
                   {group.title}
                 </h3>
 
-                <ul className="mt-5 divide-y divide-[#12332c]/10">
+                <ul className="slide-list mt-5 divide-y divide-[#12332c]/10">
                   {group.names.map((name) => (
                     <li
                       key={name}
