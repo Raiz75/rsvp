@@ -1,4 +1,9 @@
-import { IconChevronDown } from "@tabler/icons-react"
+import {
+  IconArrowUpRight,
+  IconBuildingChurch,
+  IconChevronDown,
+  IconShip,
+} from "@tabler/icons-react"
 import type { Metadata, Viewport } from "next"
 import Image from "next/image"
 import { RsvpForm } from "@/components/rsvp-form"
@@ -6,19 +11,25 @@ import { RsvpForm } from "@/components/rsvp-form"
 export const metadata: Metadata = {
   title: "The Wedding of Mack & Rolaine",
   description:
-    "Mack and Rolaine are getting married. Event details and RSVP are coming soon.",
+    "Join Mack and Rolaine as they celebrate their wedding at San Roque Chapel, Subic Bay Freeport Zone, with a reception at Subic Yacht Cruise.",
 }
 
 export const viewport: Viewport = {
   themeColor: "#f8f6f0",
 }
 
-// Placeholder details — replace with the real ones.
 const wedding = {
-  date: "Saturday, 12 December 2026",
-  time: "4:00 PM",
-  venue: "The Garden Pavilion",
-  address: "Tagaytay City, Cavite",
+  date: "Sunday, 07 February 2027",
+  time: "1:30 PM",
+  ceremony: {
+    venue: "San Roque Chapel",
+    address: "Subic Bay Freeport Zone, Olongapo, Zambales",
+  },
+  reception: {
+    venue: "Subic Yacht Cruise",
+    company: "Watercraft Venture Corp.",
+    address: "Subic Bay Freeport Zone, Olongapo, Zambales",
+  },
 }
 
 // Placeholder names — replace with the real entourage.
@@ -58,13 +69,108 @@ const entourage = [
 const details = [
   { label: "Date", value: wedding.date },
   { label: "Time", value: wedding.time },
-  { label: "Venue", value: `${wedding.venue}, ${wedding.address}` },
 ]
 
+type VenueCardProps = {
+  kind: "ceremony" | "reception"
+  eyebrow: string
+  name: string
+  company?: string
+  address: string
+  mapSrc: string
+  directionsUrl: string
+}
+
+function VenueCard({
+  kind,
+  eyebrow,
+  name,
+  company,
+  address,
+  mapSrc,
+  directionsUrl,
+}: VenueCardProps) {
+  return (
+    <article className="reveal flex flex-col overflow-hidden rounded-2xl border border-[#12332c]/10 bg-white shadow-[0_24px_60px_-40px_rgba(18,51,44,0.55)]">
+      <div className="relative aspect-[16/10] w-full border-b border-[#12332c]/10 bg-[#f3f0e6]">
+        <iframe
+          title={`Map to ${name}`}
+          src={mapSrc}
+          className="absolute inset-0 h-full w-full border-0"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          allowFullScreen
+        />
+      </div>
+
+      <div className="flex flex-1 flex-col p-6 sm:p-7">
+        <div className="flex items-start gap-4">
+          <span className="flex size-11 shrink-0 items-center justify-center rounded-full border border-[#a8874a]/30 bg-[#a8874a]/10 text-[#a8874a]">
+            {kind === "ceremony" ? (
+              <IconBuildingChurch
+                aria-hidden="true"
+                className="size-5"
+                stroke={1.5}
+              />
+            ) : (
+              <IconShip aria-hidden="true" className="size-5" stroke={1.5} />
+            )}
+          </span>
+
+          <div className="min-w-0">
+            <p className="text-[0.65rem] font-medium tracking-[0.3em] text-[#0d6157]/75 uppercase">
+              {eyebrow}
+            </p>
+            <h3 className="mt-2 font-serif text-2xl leading-tight text-[#12332c]">
+              {name}
+            </h3>
+            {company ? (
+              <p className="mt-1.5 text-[0.65rem] font-medium tracking-[0.16em] text-[#12332c]/55 uppercase">
+                {company}
+              </p>
+            ) : null}
+            <p className="mt-2 text-sm leading-relaxed text-[#4b5750]">
+              {address}
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-auto pt-6">
+          <a
+            href={directionsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-fit items-center gap-2 rounded-full border border-[#12332c]/15 px-5 py-2.5 text-[0.65rem] font-medium tracking-[0.2em] text-[#0d6157] uppercase transition-colors outline-none hover:border-[#0d6157]/40 hover:bg-[#0d6157]/5 focus-visible:ring-3 focus-visible:ring-[#0d6157]/25"
+          >
+            Directions
+            <IconArrowUpRight
+              aria-hidden="true"
+              className="size-3.5"
+              stroke={2}
+            />
+          </a>
+        </div>
+      </div>
+    </article>
+  )
+}
+
 export default function Page() {
-  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(
-    `${wedding.venue}, ${wedding.address}`
+  const ceremonyMapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(
+    `${wedding.ceremony.venue}, ${wedding.ceremony.address}`
   )}&output=embed`
+
+  const receptionMapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(
+    `${wedding.reception.venue}, ${wedding.reception.address}`
+  )}&output=embed`
+
+  const ceremonyDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+    `${wedding.ceremony.venue}, ${wedding.ceremony.address}`
+  )}`
+
+  const receptionDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+    `${wedding.reception.venue}, ${wedding.reception.address}`
+  )}`
 
   return (
     <main className="overflow-x-clip bg-[#f8f6f0]">
@@ -173,7 +279,7 @@ export default function Page() {
             <div className="reveal-line mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-[#a8874a]/60 to-transparent" />
           </div>
 
-          <dl className="reveal-stagger mt-12 grid gap-10 text-center sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-[#12332c]/10">
+          <dl className="reveal-stagger mt-12 grid gap-10 text-center sm:grid-cols-2 sm:gap-0 sm:divide-x sm:divide-[#12332c]/10">
             {details.map((item) => (
               <div key={item.label} className="sm:px-6">
                 <dt className="text-[0.65rem] font-medium tracking-[0.3em] text-[#0d6157]/75 uppercase">
@@ -187,30 +293,24 @@ export default function Page() {
           </dl>
 
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            <div className="reveal-scale overflow-hidden rounded-2xl border border-[#12332c]/10 bg-white shadow-[0_24px_60px_-40px_rgba(18,51,44,0.55)]">
-              <div className="relative aspect-[4/3] w-full">
-                <Image
-                  src="/assets/img3.jpg"
-                  alt={`The ${wedding.venue}`}
-                  fill
-                  sizes="(min-width: 1024px) 45vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-            </div>
+            <VenueCard
+              kind="ceremony"
+              eyebrow="Ceremony"
+              name={wedding.ceremony.venue}
+              address={wedding.ceremony.address}
+              mapSrc={ceremonyMapSrc}
+              directionsUrl={ceremonyDirectionsUrl}
+            />
 
-            <div className="reveal overflow-hidden rounded-2xl border border-[#12332c]/10 bg-white shadow-[0_24px_60px_-40px_rgba(18,51,44,0.55)]">
-              <div className="aspect-[4/3] w-full">
-                <iframe
-                  title={`Map to ${wedding.venue}`}
-                  src={mapSrc}
-                  className="h-full w-full border-0"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  allowFullScreen
-                />
-              </div>
-            </div>
+            <VenueCard
+              kind="reception"
+              eyebrow="Reception"
+              name={wedding.reception.venue}
+              company={wedding.reception.company}
+              address={wedding.reception.address}
+              mapSrc={receptionMapSrc}
+              directionsUrl={receptionDirectionsUrl}
+            />
           </div>
         </div>
       </section>
