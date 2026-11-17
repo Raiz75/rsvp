@@ -91,8 +91,8 @@ export default function Page() {
 
         <div className="absolute inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] flex justify-center md:translate-x-[8%]">
           <a
-            href="#details"
-            aria-label="Scroll to event details"
+            href="#story"
+            aria-label="Scroll to our story"
             className="rounded-full p-3 text-[#0d6157]/70 transition-colors hover:text-[#12332c] focus-visible:ring-2 focus-visible:ring-[#0d6157]/40 focus-visible:ring-offset-4 focus-visible:ring-offset-[#f8f6f0]"
           >
             <IconChevronDown
@@ -101,6 +101,47 @@ export default function Page() {
               stroke={1.5}
             />
           </a>
+        </div>
+      </section>
+
+      <section
+        id="story"
+        aria-labelledby="story-heading"
+        className="scroll-mt-4 border-t border-[#12332c]/10 bg-[#f8f6f0] px-safe py-20 sm:py-28"
+      >
+        <div className="mx-auto grid w-full max-w-5xl items-center gap-12 md:grid-cols-2 md:gap-16">
+          <div className="reveal-mask overflow-hidden rounded-3xl border border-[#12332c]/10 shadow-[0_30px_80px_-50px_rgba(18,51,44,0.6)]">
+            <div className="relative aspect-[4/5] w-full">
+              <Image
+                src="/assets/img1.jpg"
+                alt="Mack and Rolaine"
+                fill
+                sizes="(min-width: 768px) 45vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+
+          <div className="reveal text-center md:text-left">
+            <p className="text-[0.7rem] font-medium tracking-[0.4em] text-[#0d6157]/80 uppercase">
+              Our Story
+            </p>
+            <h2
+              id="story-heading"
+              className="mt-4 font-serif text-4xl font-normal text-balance text-[#12332c] sm:text-5xl"
+            >
+              A quiet yes, and a lifetime after
+            </h2>
+            <div className="reveal-line mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-[#a8874a]/60 to-transparent md:mx-0 md:origin-left" />
+            <p className="mt-6 text-sm leading-relaxed text-[#4b5750]">
+              What began as a chance meeting over coffee has become a life we
+              are building together. We would love for you to be there as we say
+              our vows.
+            </p>
+            <p className="mt-6 font-serif text-lg text-[#0d6157] italic">
+              Mack &amp; Rolaine
+            </p>
+          </div>
         </div>
       </section>
 
@@ -120,7 +161,7 @@ export default function Page() {
             >
               The Celebration
             </h2>
-            <div className="mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-[#a8874a]/60 to-transparent" />
+            <div className="reveal-line mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-[#a8874a]/60 to-transparent" />
           </div>
 
           <dl className="reveal-stagger mt-12 grid gap-10 text-center sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-[#12332c]/10">
@@ -136,20 +177,44 @@ export default function Page() {
             ))}
           </dl>
 
-          <div className="reveal mt-12 overflow-hidden rounded-2xl border border-[#12332c]/10 bg-white shadow-[0_24px_60px_-40px_rgba(18,51,44,0.55)]">
-            <div className="aspect-[4/3] w-full sm:aspect-[16/9]">
-              <iframe
-                title={`Map to ${wedding.venue}`}
-                src={mapSrc}
-                className="h-full w-full border-0"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                allowFullScreen
-              />
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            <div className="reveal-scale overflow-hidden rounded-2xl border border-[#12332c]/10 bg-white shadow-[0_24px_60px_-40px_rgba(18,51,44,0.55)]">
+              <div className="relative aspect-[4/3] w-full">
+                <Image
+                  src="/assets/img3.jpg"
+                  alt={`The ${wedding.venue}`}
+                  fill
+                  sizes="(min-width: 1024px) 45vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
+            <div className="reveal overflow-hidden rounded-2xl border border-[#12332c]/10 bg-white shadow-[0_24px_60px_-40px_rgba(18,51,44,0.55)]">
+              <div className="aspect-[4/3] w-full">
+                <iframe
+                  title={`Map to ${wedding.venue}`}
+                  src={mapSrc}
+                  className="h-full w-full border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
+
+      <div className="relative h-[44svh] w-full overflow-hidden border-y border-[#12332c]/10 sm:h-[62svh]">
+        <Image
+          src="/assets/img2.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="parallax object-cover"
+        />
+      </div>
 
       <section
         id="entourage"
@@ -167,7 +232,7 @@ export default function Page() {
             >
               Wedding Party
             </h2>
-            <div className="mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-[#a8874a]/60 to-transparent" />
+            <div className="reveal-line mx-auto mt-6 h-px w-16 bg-gradient-to-r from-transparent via-[#a8874a]/60 to-transparent" />
           </div>
 
           <div className="reveal-stagger mt-12 grid gap-8 sm:grid-cols-2">
